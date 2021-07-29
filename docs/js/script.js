@@ -14092,7 +14092,8 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
 
   function hideTabContent() {
     content.forEach(item => {
-      item.style.display = 'none';
+      item.style.display = 'none'; //item.classList.add('hide');
+      //item.classList.remove('show', 'fade');
     });
     tab.forEach(item => {
       item.classList.remove(activeClass);
@@ -14100,7 +14101,9 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
   }
 
   function showTabContent(i = 2) {
-    content[i].style.display = 'block';
+    content[i].style.display = 'block'; //content[i].classList.add('show', 'fade');
+    //content[i].classList.remove('hide');
+
     tab[i].classList.add(activeClass);
   }
 
