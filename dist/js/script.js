@@ -14013,6 +14013,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_changaModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changaModalState */ "./src/js/modules/changaModalState.js");
+
 
 
 
@@ -14020,12 +14022,29 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
+  let modalState = {};
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider ', '.glazing_block', '.glazing_content', 'active');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_modules_changaModalState__WEBPACK_IMPORTED_MODULE_4__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/changaModalState.js":
+/*!********************************************!*\
+  !*** ./src/js/modules/changaModalState.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const changeModalState = state => {};
+
+/* harmony default export */ __webpack_exports__["default"] = (changeModalState);
 
 /***/ }),
 
@@ -14158,9 +14177,11 @@ const modals = () => {
     setTimeout(() => openModal(selector), time);
   }
 
-  bindModal('.popup_engineer_btn', '.popup_engineer', false);
+  bindModal('.popup_engineer_btn', '.popup_engineer');
   bindModal('.phone_link', '.popup');
   bindModal('.popup_calc_btn', '.popup_calc');
+  bindModal('.popup_calc_button', '.popup_calc_profile', false);
+  bindModal('.popup_calc_profile_button', '.popup_calc_end', false);
   showModalByTime('.popup', 60000);
 };
 
