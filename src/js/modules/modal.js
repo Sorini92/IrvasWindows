@@ -5,6 +5,7 @@ const modals = () => {
         modal.style.display = 'flex';
         //document.body.style.overflow = 'hidden';
         document.body.classList.add('modal-open');
+        modal.classList.add('animate__animated', 'animate__fadeIn');
     }
     
     function closeModal(modalSelector) {
@@ -13,6 +14,7 @@ const modals = () => {
         modal.style.display = 'none';
         //document.body.style.overflow = '';
         document.body.classList.remove('modal-open');
+        modal.classList.remove('animate__animated', 'animate__fadeIn');
     }
     
     function bindModal(triggerSelector, modalSelector) {

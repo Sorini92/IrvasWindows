@@ -6,8 +6,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
     function hideTabContent() {
         content.forEach(item => {
             item.style.display = 'none';
-            //item.classList.add('hide');
-            //item.classList.remove('show', 'fade');
+            item.classList.remove('animate__animated', 'animate__zoomIn');
         });
 
         tab.forEach(item => {
@@ -17,8 +16,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
 
     function showTabContent(i = 2) {
         content[i].style.display = 'block';
-        //content[i].classList.add('show', 'fade');
-        //content[i].classList.remove('hide');
+        content[i].classList.add('animate__animated', 'animate__zoomIn');
         tab[i].classList.add(activeClass);
     }
 
@@ -38,6 +36,6 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
             });
         }
     });
-}
+};
 
 export default tabs;

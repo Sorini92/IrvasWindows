@@ -14038,6 +14038,7 @@ const modals = () => {
     modal.style.display = 'flex'; //document.body.style.overflow = 'hidden';
 
     document.body.classList.add('modal-open');
+    modal.classList.add('animate__animated', 'animate__fadeIn');
   }
 
   function closeModal(modalSelector) {
@@ -14045,6 +14046,7 @@ const modals = () => {
     modal.style.display = 'none'; //document.body.style.overflow = '';
 
     document.body.classList.remove('modal-open');
+    modal.classList.remove('animate__animated', 'animate__fadeIn');
   }
 
   function bindModal(triggerSelector, modalSelector) {
@@ -14092,8 +14094,8 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
 
   function hideTabContent() {
     content.forEach(item => {
-      item.style.display = 'none'; //item.classList.add('hide');
-      //item.classList.remove('show', 'fade');
+      item.style.display = 'none';
+      item.classList.remove('animate__animated', 'animate__zoomIn');
     });
     tab.forEach(item => {
       item.classList.remove(activeClass);
@@ -14101,9 +14103,8 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
   }
 
   function showTabContent(i = 2) {
-    content[i].style.display = 'block'; //content[i].classList.add('show', 'fade');
-    //content[i].classList.remove('hide');
-
+    content[i].style.display = 'block';
+    content[i].classList.add('animate__animated', 'animate__zoomIn');
     tab[i].classList.add(activeClass);
   }
 
