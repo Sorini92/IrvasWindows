@@ -14023,6 +14023,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider ', '.glazing_block', '.glazing_content', 'active');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
@@ -14110,25 +14111,35 @@ const modals = () => {
   }
 
   function closeModal(modalSelector) {
-    const modal = document.querySelector(modalSelector);
+    const modal = document.querySelector(modalSelector),
+          windows = document.querySelectorAll('[data-modal]');
     modal.style.display = 'none'; //document.body.style.overflow = '';
 
     document.body.classList.remove('modal-open');
     modal.classList.remove('animate__animated', 'animate__fadeIn');
+    windows.forEach(item => {
+      item.style.display = 'none';
+    });
   }
 
-  function bindModal(triggerSelector, modalSelector) {
+  function bindModal(triggerSelector, modalSelector, closeClickOverlay = true) {
     const modalTrigger = document.querySelectorAll(triggerSelector),
-          modal = document.querySelector(modalSelector);
+          modal = document.querySelector(modalSelector),
+          windows = document.querySelectorAll('[data-modal]');
     modalTrigger.forEach((btn, e) => {
-      if (e.target) {
-        e.preventDefault();
-      }
+      btn.addEventListener('click', () => {
+        if (e.target) {
+          e.preventDefault();
+        }
 
-      btn.addEventListener('click', () => openModal(modalSelector));
+        windows.forEach(item => {
+          item.style.display = 'none';
+        });
+        openModal(modalSelector);
+      });
     });
     modal.addEventListener('click', e => {
-      if (e.target === modal || e.target.getAttribute('data-close') == '' || e.target.tagName == "STRONG") {
+      if (e.target === modal && closeClickOverlay || e.target.getAttribute('data-close') == '' || e.target.tagName == "STRONG") {
         closeModal(modalSelector);
       }
     });
@@ -14147,8 +14158,9 @@ const modals = () => {
     setTimeout(() => openModal(selector), time);
   }
 
-  bindModal('.popup_engineer_btn', '.popup_engineer');
+  bindModal('.popup_engineer_btn', '.popup_engineer', false);
   bindModal('.phone_link', '.popup');
+  bindModal('.popup_calc_btn', '.popup_calc');
   showModalByTime('.popup', 60000);
 };
 
@@ -14165,7 +14177,7 @@ const modals = () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
+const tabs = (headerSelector, tabSelector, contentSelector, activeClass, dispay = 'block') => {
   const header = document.querySelector(headerSelector),
         tab = document.querySelectorAll(tabSelector),
         content = document.querySelectorAll(contentSelector);
@@ -14173,7 +14185,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
   function hideTabContent() {
     content.forEach(item => {
       item.style.display = 'none';
-      item.classList.remove('animate__animated', 'animate__zoomIn');
+      item.classList.remove('animate__animated', 'animate__fadeIn');
     });
     tab.forEach(item => {
       item.classList.remove(activeClass);
@@ -14181,8 +14193,8 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass) => {
   }
 
   function showTabContent(i = 2) {
-    content[i].style.display = 'block';
-    content[i].classList.add('animate__animated', 'animate__zoomIn');
+    content[i].style.display = dispay;
+    content[i].classList.add('animate__animated', 'animate__fadeIn');
     tab[i].classList.add(activeClass);
   }
 

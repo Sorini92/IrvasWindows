@@ -9,27 +9,41 @@ const modals = () => {
     }
     
     function closeModal(modalSelector) {
-        const modal = document.querySelector(modalSelector);
+        const modal = document.querySelector(modalSelector),
+        windows = document.querySelectorAll('[data-modal]');
     
         modal.style.display = 'none';
         //document.body.style.overflow = '';
         document.body.classList.remove('modal-open');
         modal.classList.remove('animate__animated', 'animate__fadeIn');
+
+        windows.forEach((item) => {
+            item.style.display = 'none';
+        });
     }
     
-    function bindModal(triggerSelector, modalSelector) {
+    function bindModal(triggerSelector, modalSelector, closeClickOverlay = true) {
         const modalTrigger = document.querySelectorAll(triggerSelector),
-              modal = document.querySelector(modalSelector);
+              modal = document.querySelector(modalSelector),
+              windows = document.querySelectorAll('[data-modal]');
     
         modalTrigger.forEach((btn, e) => {
-            if (e.target) {
-                e.preventDefault();
-            }
-            btn.addEventListener('click', () => openModal(modalSelector));
+            btn.addEventListener('click', () => {
+                if (e.target) {
+                    e.preventDefault();
+                }
+
+                windows.forEach((item) => {
+                    item.style.display = 'none';
+                });
+
+                openModal(modalSelector);
+            });
         });
         
         modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target.getAttribute('data-close') == '' || e.target.tagName == "STRONG") {
+            if (e.target === modal && closeClickOverlay || e.target.getAttribute('data-close') == '' || 
+            e.target.tagName == "STRONG") {
                 closeModal(modalSelector);
             }
         });
@@ -48,8 +62,9 @@ const modals = () => {
         setTimeout(() => openModal(selector), time);
     }
     
-    bindModal('.popup_engineer_btn', '.popup_engineer');
+    bindModal('.popup_engineer_btn', '.popup_engineer', false);
     bindModal('.phone_link', '.popup');
+    bindModal('.popup_calc_btn', '.popup_calc');
     showModalByTime('.popup', 60000);
 };
 
