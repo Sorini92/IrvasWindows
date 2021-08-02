@@ -1,6 +1,7 @@
 import checkNumInputs from './checkNumInputs';
+import {closeModal} from './modal';
 
-const forms = () => {
+const forms = (state) => {
     const form = document.querySelectorAll('form'),
           inputs = document.querySelectorAll('input');
 
@@ -38,6 +39,12 @@ const forms = () => {
             item.appendChild(statusMessage);
 
             const formData = new FormData(item);
+            if (item.getAttribute('data-calc') === "end") {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                    setTimeout(() => closeModal('.popup_calc_end'), 2000);
+                }
+            }
 
             postData('assets/server.php', formData)
             .then(res => {
@@ -47,6 +54,9 @@ const forms = () => {
             .catch(() => statusMessage.textContent = message.failure)
             .finally(()  => {
                 clearInputs();
+                for (const prop of Object.getOwnPropertyNames(state)) {
+                    delete state[prop];
+                }
                 setTimeout(() => {
                     statusMessage.remove();
                 }, 10000);

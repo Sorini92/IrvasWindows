@@ -1,27 +1,27 @@
-const modals = () => {
-    function openModal(modalSelector) {
-        const modal = document.querySelector(modalSelector);
-    
-        modal.style.display = 'flex';
-        //document.body.style.overflow = 'hidden';
-        document.body.classList.add('modal-open');
-        modal.classList.add('animate__animated', 'animate__fadeIn');
-    }
-    
-    function closeModal(modalSelector) {
-        const modal = document.querySelector(modalSelector),
-        windows = document.querySelectorAll('[data-modal]');
-    
-        modal.style.display = 'none';
-        //document.body.style.overflow = '';
-        document.body.classList.remove('modal-open');
-        modal.classList.remove('animate__animated', 'animate__fadeIn');
+function openModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
 
-        windows.forEach((item) => {
-            item.style.display = 'none';
-        });
-    }
-    
+    modal.style.display = 'flex';
+    //document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    modal.classList.add('animate__animated', 'animate__fadeIn');
+}
+
+function closeModal(modalSelector) {
+    const modal = document.querySelector(modalSelector),
+    windows = document.querySelectorAll('[data-modal]');
+
+    modal.style.display = 'none';
+    //document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+    modal.classList.remove('animate__animated', 'animate__fadeIn');
+
+    windows.forEach((item) => {
+        item.style.display = 'none';
+    });
+}
+
+const modals = () => {   
     function bindModal(triggerSelector, modalSelector, closeClickOverlay = true) {
         const modalTrigger = document.querySelectorAll(triggerSelector),
               modal = document.querySelector(modalSelector),
@@ -70,4 +70,5 @@ const modals = () => {
     showModalByTime('.popup', 60000);
 };
 
+export {closeModal};
 export default modals;
