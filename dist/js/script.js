@@ -14054,6 +14054,28 @@ const changeModalState = state => {
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('#width');
   Object(_checkNumInputs__WEBPACK_IMPORTED_MODULE_0__["default"])('#height');
 
+  function validation(item) {
+    const form = document.querySelector('.popup_calc_content'),
+          nextBtn = document.querySelector('.popup_calc_button'),
+          inputValue = form.querySelectorAll('input');
+    nextBtn.addEventListener('click', e => {
+      console.log(item.length);
+
+      if (item.length == 0) {
+        let error = document.createElement('div');
+        error.classList.add('status');
+        error.innerHTML = 'Заполните все поля!';
+        inputValue.forEach(input => {
+          input.style.border = "1px solid red";
+        });
+        form.append(error);
+      }
+    });
+    return item;
+  }
+
+  validation();
+
   function bindActionToElems(event, elem, prop) {
     elem.forEach((item, i) => {
       item.addEventListener(event, () => {
@@ -14064,7 +14086,13 @@ const changeModalState = state => {
 
           case 'INPUT':
             if (item.getAttribute('type') === 'checkbox') {
-              i === 0 ? state[prop] = 'Холодное' : state[prop] = 'Теплое';
+              //i === 0 ? state[prop] = 'Холодное' : state[prop] = "Теплое";
+              if (i === 0) {
+                state[prop] = 'Холодное';
+              } else {
+                state[prop] = "Теплое";
+              }
+
               elem.forEach((box, j) => {
                 box.checked = false;
 
@@ -14074,6 +14102,7 @@ const changeModalState = state => {
               });
             } else {
               state[prop] = item.value;
+              validation(state.height);
             }
 
             break;
@@ -14160,6 +14189,10 @@ const forms = state => {
     });
   };
 
+  const closeModalAfterSending = (selector, time) => {
+    setTimeout(() => Object(_modal__WEBPACK_IMPORTED_MODULE_1__["closeModal"])(selector), time);
+  };
+
   form.forEach(item => {
     item.addEventListener('submit', e => {
       e.preventDefault();
@@ -14171,7 +14204,7 @@ const forms = state => {
       if (item.getAttribute('data-calc') === "end") {
         for (let key in state) {
           formData.append(key, state[key]);
-          setTimeout(() => Object(_modal__WEBPACK_IMPORTED_MODULE_1__["closeModal"])('.popup_calc_end'), 2000);
+          closeModalAfterSending('.popup_calc_end', 2000);
         }
       }
 
@@ -14266,8 +14299,8 @@ const modals = () => {
 
   bindModal('.popup_engineer_btn', '.popup_engineer');
   bindModal('.phone_link', '.popup');
-  bindModal('.popup_calc_btn', '.popup_calc');
-  bindModal('.popup_calc_button', '.popup_calc_profile', false);
+  bindModal('.popup_calc_btn', '.popup_calc'); //bindModal('.popup_calc_button', '.popup_calc_profile', false);    
+
   bindModal('.popup_calc_profile_button', '.popup_calc_end', false);
   showModalByTime('.popup', 60000);
 };

@@ -5,7 +5,6 @@ const forms = (state) => {
     const form = document.querySelectorAll('form'),
           inputs = document.querySelectorAll('input');
 
-
     checkNumInputs('input[name="user_phone"]');
 
     const message = {
@@ -30,6 +29,10 @@ const forms = (state) => {
         });
     };
 
+    const closeModalAfterSending = (selector, time) => {
+        setTimeout(() => closeModal(selector), time);
+    };
+
     form.forEach(item => {
         item.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -42,7 +45,7 @@ const forms = (state) => {
             if (item.getAttribute('data-calc') === "end") {
                 for (let key in state) {
                     formData.append(key, state[key]);
-                    setTimeout(() => closeModal('.popup_calc_end'), 2000);
+                    closeModalAfterSending('.popup_calc_end', 2000);
                 }
             }
 

@@ -65,7 +65,7 @@ const modals = () => {
     bindModal('.popup_engineer_btn', '.popup_engineer');
     bindModal('.phone_link', '.popup');
     bindModal('.popup_calc_btn', '.popup_calc');
-    bindModal('.popup_calc_button', '.popup_calc_profile', false);
+    //bindModal('.popup_calc_button', '.popup_calc_profile', false);    
     bindModal('.popup_calc_profile_button', '.popup_calc_end', false);
     showModalByTime('.popup', 60000);
 };
