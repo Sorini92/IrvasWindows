@@ -26,7 +26,7 @@ const modals = () => {
         const modalTrigger = document.querySelectorAll(triggerSelector),
               modal = document.querySelector(modalSelector),
               windows = document.querySelectorAll('[data-modal]');
-    
+        
         modalTrigger.forEach((btn, e) => {
             btn.addEventListener('click', () => {
                 if (e.target) {
@@ -61,11 +61,35 @@ const modals = () => {
     function showModalByTime (selector, time) {
         setTimeout(() => openModal(selector), time);
     }
+
+ /*    function validation (modalSelector) {
+        const modal = document.querySelector(modalSelector),
+              height = modal.querySelector('#height'),
+              width = modal.querySelector('#width'),
+              nextBtn = document.querySelector('.popup_calc_button');
+
+        function error(a, b) {
+            if (a.value.length == 0) {
+                a.style.border = "1px solid red";                        
+            } else {
+                a.style.border = "none";
+                bindModal('.popup_calc_button', '.popup_calc_profile', false); 
+            }
+        }
+            
+            nextBtn.addEventListener('click', () => {
+                error(width);
+                error(height);
+            });
+            
+        console.log(width.value);
+    }
+    validation('.popup_calc_content'); */
     
     bindModal('.popup_engineer_btn', '.popup_engineer');
     bindModal('.phone_link', '.popup');
     bindModal('.popup_calc_btn', '.popup_calc');
-    //bindModal('.popup_calc_button', '.popup_calc_profile', false);    
+    bindModal('.popup_calc_button', '.popup_calc_profile', false);    
     bindModal('.popup_calc_profile_button', '.popup_calc_end', false);
     showModalByTime('.popup', 60000);
 };
