@@ -62,25 +62,40 @@ const modals = () => {
         setTimeout(() => openModal(selector), time);
     }
 
-    function error(formSelector) {
+    
+
+    /* const error = (formSelector) => {
         const form = document.querySelector(formSelector),
               firstInput = form.querySelector('#height'),
-              secondInput = form.querySelector('#width');
+              secondInput = form.querySelector('#width'); 
+              inputs = form.querySelectorAll('input');
         
-        if ((secondInput.value !== '') && (firstInput.value !== '')) {
-            bindModal('.popup_calc_button', '.popup_calc_profile', false);
-        }   
+        inputs.forEach((item) => {
+            console.log(item);
+            item.addEventListener('input', () => {
+                if (item.value.length == 0) {
+                    item.style.border = "1px solid red"; 
+                    console.log(item.value.length);                       
+                } else {
+                    item.style.border = "none";
+                    console.log(item.value.length);
+                    //bindModal('.popup_calc_button', '.popup_calc_profile', false); 
+                }
+                if (item.value.length != 0) {
+                    bindModal('.popup_calc_button', '.popup_calc_profile', false);
+                }
+            });
+        }); */
 
-        console.log(firstInput.value);
-            console.log(secondInput.value);
         
-        firstInput.addEventListener('input', () => {
+        
+        /* firstInput.addEventListener('input', () => {
             if (firstInput.value.length == 0) {
                 firstInput.style.border = "1px solid red"; 
-                //console.log(firstInput.value.length);                       
+                console.log(firstInput.value.length);                       
             } else {
                 firstInput.style.border = "none";
-                //console.log(firstInput.value.length);
+                console.log(firstInput.value.length);
                 //bindModal('.popup_calc_button', '.popup_calc_profile', false); 
             }
         });
@@ -88,23 +103,26 @@ const modals = () => {
         secondInput.addEventListener('input', () => {
             if (secondInput.value.length == 0) {
                 secondInput.style.border = "1px solid red";   
-                //console.log(secondInput.value.length);                     
+                console.log(secondInput.value.length);                     
             } else {
                 secondInput.style.border = "none";
-                //console.log(secondInput.value.length);
+                console.log(secondInput.value.length);
                 //bindModal('.popup_calc_button', '.popup_calc_profile', false); 
             }     
         });
-    }
 
-    error('.popup_calc_content');
+        if ((secondInput.value.length !== 0) && (firstInput.value.length !== 0)) {
+            bindModal('.popup_calc_button', '.popup_calc_profile', false);
+        }   */
+    /* }; */
+
     
     bindModal('.popup_engineer_btn', '.popup_engineer');
     bindModal('.phone_link', '.popup');
     bindModal('.popup_calc_btn', '.popup_calc');
-    //bindModal('.popup_calc_button', '.popup_calc_profile', false);    
+    bindModal('.popup_calc_button', '.popup_calc_profile', false);    
     bindModal('.popup_calc_profile_button', '.popup_calc_end', false);
-    showModalByTime('.popup', 60000);
+    //showModalByTime('.popup', 60000);
 };
 
 export {closeModal};

@@ -25,8 +25,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass, dispay 
 
     header.addEventListener('click', (e) => {
         let target = e.target;
-        if (target &&
-            (target.classList.contains(tabSelector.replace(/\./, "")) || 
+        if (target && (target.classList.contains(tabSelector.replace(/\./, "")) || 
             target.parentNode.classList.contains(tabSelector.replace(/\./, "")))) {
             tab.forEach((item, i) => {
                 if (target == item || target.parentNode == item) {

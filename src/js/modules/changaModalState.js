@@ -5,10 +5,13 @@ const changeModalState = (state) => {
           windowWidth = document.querySelectorAll('#width'),
           windowHeight = document.querySelectorAll('#height'),
           windowType = document.querySelectorAll('#view_type'),
-          windowProfile = document.querySelectorAll('.checkbox');
+          windowProfile = document.querySelectorAll('.checkbox'),
+          nextBtn = document.querySelector('.popup_calc_button');
 
     checkNumInputs('#width');
     checkNumInputs('#height');
+
+    
 
     function bindActionToElems(event, elem, prop) {
         elem.forEach((item, i) => {
@@ -32,7 +35,12 @@ const changeModalState = (state) => {
                                 }
                             });
                         } else {
-                            state[prop] = item.value;                           
+                            if (item.value.length == 0) {
+                                item.style.border = "1px solid red"; 
+                            } else {
+                                    item.style.border = "none";
+                                    state[prop] = item.value; 
+                            }                     
                         }
                         break;
                     case 'SELECT' :
