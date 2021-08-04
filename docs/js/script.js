@@ -14228,36 +14228,25 @@ __webpack_require__.r(__webpack_exports__);
 const images = () => {
   const imgPopup = document.createElement('div'),
         workSection = document.querySelector('.works'),
-        bigImg = document.createElement('img');
+        bigImg = document.createElement('img'),
+        images = workSection.querySelectorAll('img');
   imgPopup.classList.add('popup', 'animate__animated', 'animate__fadeIn');
-  bigImg.classList.add('popup_content'); //imgPopup.style.display = 'flex';
-
-  /* bigImg.style.cssText = `
-  min-height: 540px;
-  min-width: 720px;
-  top: 20%;
-  background: url(assets/img/our_works/big_img/1.png) center center no-repeat;
-  `; */
-
+  bigImg.classList.add('popup_content');
   imgPopup.append(bigImg);
   document.body.append(imgPopup);
-  console.log(workSection);
   workSection.addEventListener('click', e => {
     e.preventDefault();
-    console.log(e.target);
-    const images = workSection.querySelectorAll('img');
 
     if (e.target.tagName == "IMG") {
       images.forEach((item, i) => {
-        i = e.target;
-        console.log(i);
-        imgPopup.style.display = 'flex';
-        bigImg.style.cssText = `
-                    min-height: 540px;
-                    min-width: 720px;
-                    top: 20%;
-                    background: url(assets/img/our_works/big_img/${i}.png) center center no-repeat;
-                `;
+        if (e.target === item) {
+          imgPopup.style.display = 'block';
+          bigImg.style.cssText = `
+                        min-height: 720px;
+                        min-width: 720px;
+                        background: url(assets/img/our_works/big_img/${i + 1}.png) center center / cover no-repeat;
+                    `;
+        }
       });
     }
   });
@@ -14371,7 +14360,7 @@ const modals = () => {
           //bindModal('.popup_calc_button', '.popup_calc_profile', false); 
       }
   });
-   secondInput.addEventListener('input', () => {
+    secondInput.addEventListener('input', () => {
       if (secondInput.value.length == 0) {
           secondInput.style.border = "1px solid red";   
           console.log(secondInput.value.length);                     
@@ -14381,7 +14370,7 @@ const modals = () => {
           //bindModal('.popup_calc_button', '.popup_calc_profile', false); 
       }     
   });
-   if ((secondInput.value.length !== 0) && (firstInput.value.length !== 0)) {
+    if ((secondInput.value.length !== 0) && (firstInput.value.length !== 0)) {
       bindModal('.popup_calc_button', '.popup_calc_profile', false);
   }   */
 
