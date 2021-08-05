@@ -4,7 +4,9 @@ const images = () => {
           bigImg = document.createElement('img');
     
     imgPopup.classList.add('popup', 'animate__animated', 'animate__fadeIn');
-    bigImg.classList.add('popup_content');
+    //bigImg.classList.add('popup_content');
+    imgPopup.style.justifyContent = 'center';
+    imgPopup.style.alignItems = 'center';
     imgPopup.appendChild(bigImg);
     workSection.appendChild(imgPopup);  
 
@@ -15,10 +17,12 @@ const images = () => {
             imgPopup.style.display = 'flex';
             bigImg.style.cssText = `
                         height: auto;
-                        max-height: 70%;
+                        max-height: 80%;
                         width: auto;
-                        max-width: 50%;
+                        max-width: 90%;
                         overflow: hidden;
+                        justify-content: center;
+                        align-items: center;
                     `;
             document.body.style.overflow = 'hidden';
             const path = e.target.parentNode.getAttribute('href');
