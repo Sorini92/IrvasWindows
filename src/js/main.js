@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
     "use strict";
 
     let modalState = {};
+    let deadline = '2022-06-11';
 
     changeModalState(modalState);
     modals();
@@ -18,5 +19,5 @@ window.addEventListener('DOMContentLoaded', () => {
     tabs('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
     forms(modalState);
     images();
-    timer('#timer', '2022-06-11');
+    timer('#timer', deadline);
 });

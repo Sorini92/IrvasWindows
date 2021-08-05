@@ -5,13 +5,10 @@ const changeModalState = (state) => {
           windowWidth = document.querySelectorAll('#width'),
           windowHeight = document.querySelectorAll('#height'),
           windowType = document.querySelectorAll('#view_type'),
-          windowProfile = document.querySelectorAll('.checkbox'),
-          nextBtn = document.querySelector('.popup_calc_button');
+          windowProfile = document.querySelectorAll('.checkbox');
 
     checkNumInputs('#width');
     checkNumInputs('#height');
-
-    
 
     function bindActionToElems(event, elem, prop) {
         elem.forEach((item, i) => {

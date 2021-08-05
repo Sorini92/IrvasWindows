@@ -40,7 +40,11 @@ const timer = (id, deadline) => {
             minutes.innerHTML = getZero(t.minutes);
             seconds.innerHTML = getZero(t.seconds);
 
-            if (t <= 0) {
+            if (t.total <= 0) {
+                days.innerHTML = '00';
+                hours.innerHTML = '00';
+                minutes.innerHTML = '00';
+                seconds.innerHTML = '00';
                 clearInterval(timeInterval);
             }
         }
@@ -61,6 +65,7 @@ const timer = (id, deadline) => {
         setClockDescriprion();
 
     }
+    
     setClock(id, deadline);
 };
 
