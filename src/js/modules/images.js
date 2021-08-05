@@ -4,7 +4,6 @@ const images = () => {
           bigImg = document.createElement('img');
     
     imgPopup.classList.add('popup', 'animate__animated', 'animate__fadeIn');
-    //bigImg.classList.add('popup_content');
     imgPopup.style.justifyContent = 'center';
     imgPopup.style.alignItems = 'center';
     imgPopup.appendChild(bigImg);

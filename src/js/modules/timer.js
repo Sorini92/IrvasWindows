@@ -1,4 +1,4 @@
-const timer = (deadline) => {
+const timer = (id, deadline) => {
     function getTimeRemaining (endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
             days = Math.floor(t / (1000 * 60* 60 * 24)),
@@ -14,9 +14,54 @@ const timer = (deadline) => {
         };
     }
 
-    function setClock() {
-        
+    function getZero(num) {
+        if (num >=0 && num < 10) {
+           return `0${num}`;
+        } else {
+            return num;
+        }
     }
+
+    function setClock(selector, endtime) {
+        const timer = document.querySelector(selector),
+              days = timer.querySelector('#days'),
+              hours = timer.querySelector('#hours'),
+              minutes = timer.querySelector('#minutes'),
+              seconds = timer.querySelector('#seconds'),
+              timeInterval = setInterval(updateClock, 1000);
+
+        updateClock();
+              
+        function updateClock() {
+            const t = getTimeRemaining(endtime);
+
+            days.innerHTML = getZero(t.days);
+            hours.innerHTML = getZero(t.hours);
+            minutes.innerHTML = getZero(t.minutes);
+            seconds.innerHTML = getZero(t.seconds);
+
+            if (t <= 0) {
+                clearInterval(timeInterval);
+            }
+        }
+
+        function setClockDescriprion (i) {
+            const day = deadline.slice(8,10),
+                  month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
+                  'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',],
+                  getMonth = +deadline.slice(5,7),
+                  div = document.createElement('div'),
+                  wrapper = document.querySelector('.sale_subtitle');
+                
+            div.classList.add('timer__descr');
+            div.innerHTML = `Только до ${day} ${month[getMonth-1]}!`;
+            wrapper.append(div);
+        }
+    
+        setClockDescriprion();
+
+    }
+    setClock(id, deadline);
 };
 
 export default timer;

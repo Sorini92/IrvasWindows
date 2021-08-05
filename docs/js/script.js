@@ -14034,7 +14034,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
   Object(_modules_images__WEBPACK_IMPORTED_MODULE_5__["default"])();
-  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_6__["default"])('#timer', '2022-06-11');
 });
 
 /***/ }),
@@ -14232,8 +14232,7 @@ const images = () => {
   const imgPopup = document.createElement('div'),
         workSection = document.querySelector('.works'),
         bigImg = document.createElement('img');
-  imgPopup.classList.add('popup', 'animate__animated', 'animate__fadeIn'); //bigImg.classList.add('popup_content');
-
+  imgPopup.classList.add('popup', 'animate__animated', 'animate__fadeIn');
   imgPopup.style.justifyContent = 'center';
   imgPopup.style.alignItems = 'center';
   imgPopup.appendChild(bigImg);
@@ -14455,7 +14454,7 @@ const tabs = (headerSelector, tabSelector, contentSelector, activeClass, dispay 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-const timer = deadline => {
+const timer = (id, deadline) => {
   function getTimeRemaining(endtime) {
     const t = Date.parse(endtime) - Date.parse(new Date()),
           days = Math.floor(t / (1000 * 60 * 60 * 24)),
@@ -14471,7 +14470,50 @@ const timer = deadline => {
     };
   }
 
-  function setClock() {}
+  function getZero(num) {
+    if (num >= 0 && num < 10) {
+      return `0${num}`;
+    } else {
+      return num;
+    }
+  }
+
+  function setClock(selector, endtime) {
+    const timer = document.querySelector(selector),
+          days = timer.querySelector('#days'),
+          hours = timer.querySelector('#hours'),
+          minutes = timer.querySelector('#minutes'),
+          seconds = timer.querySelector('#seconds'),
+          timeInterval = setInterval(updateClock, 1000);
+    updateClock();
+
+    function updateClock() {
+      const t = getTimeRemaining(endtime);
+      days.innerHTML = getZero(t.days);
+      hours.innerHTML = getZero(t.hours);
+      minutes.innerHTML = getZero(t.minutes);
+      seconds.innerHTML = getZero(t.seconds);
+
+      if (t <= 0) {
+        clearInterval(timeInterval);
+      }
+    }
+
+    function setClockDescriprion(i) {
+      const day = deadline.slice(8, 10),
+            month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
+            getMonth = +deadline.slice(5, 7),
+            div = document.createElement('div'),
+            wrapper = document.querySelector('.sale_subtitle');
+      div.classList.add('timer__descr');
+      div.innerHTML = `Только до ${day} ${month[getMonth - 1]}!`;
+      wrapper.append(div);
+    }
+
+    setClockDescriprion();
+  }
+
+  setClock(id, deadline);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (timer);
